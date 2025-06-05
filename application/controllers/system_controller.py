@@ -1,7 +1,7 @@
 import os
 import subprocess
 import psutil
-import pyautogui
+# import pyautogui
 import json
 
 
@@ -27,26 +27,26 @@ class SystemController:
     def open_calculator():
         subprocess.Popen(["galculator"])
         
-    def autogui(command):
-        print(command)
-        try:
-            action = command.get("acao")
+    # def autogui(command):
+    #     print(command)
+    #     try:
+    #         action = command.get("acao")
             
-            if action == "mover_mouse":
-                x = int(command.get("x", 0))
-                y = int(command.get("y", 0))
-                pyautogui.moveTo(x=y,y=y)
+    #         if action == "mover_mouse":
+    #             x = int(command.get("x", 0))
+    #             y = int(command.get("y", 0))
+    #             pyautogui.moveTo(x=y,y=y)
                 
-            elif action == "clicar":
-                button = command.get("botão")
-                if button is None:
-                    print("Campo 'botão' faltando na mensagem!")
-                else:
-                    pyautogui.click(button=button)
-            else:
-                print(f"Ação desconhecida ou vazia: {action} - nenhuma operação executada.")
+    #         elif action == "clicar":
+    #             button = command.get("botão")
+    #             if button is None:
+    #                 print("Campo 'botão' faltando na mensagem!")
+    #             else:
+    #                 pyautogui.click(button=button)
+    #         else:
+    #             print(f"Ação desconhecida ou vazia: {action} - nenhuma operação executada.")
                     
-        except Exception as e:
-            print(f"Erro no comando: {e}")        
+    #     except Exception as e:
+    #         print(f"Erro no comando: {e}")        
         
         

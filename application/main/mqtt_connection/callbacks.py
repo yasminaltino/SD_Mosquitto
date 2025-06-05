@@ -10,11 +10,10 @@ def on_connect(client, userdata, flags, rc, properties=None):
         print(f"Cliente conectado com sucesso: {client}")
         client.subscribe(mqtt_broker_configs["TOPIC"] + "/system/volume")
         client.subscribe(mqtt_broker_configs["TOPIC"] + "/talk")
-        # client.subscribe(mqtt_broker_configs["TOPIC"] + "/alarm")
         client.subscribe(mqtt_broker_configs["TOPIC"] + "/system/block")
         client.subscribe(mqtt_broker_configs["TOPIC"] + "/system/battery")
         client.subscribe(mqtt_broker_configs["TOPIC"] + "/system/calculator")
-        client.subscribe(mqtt_broker_configs["TOPIC"] + "/system/interacao")
+        # client.subscribe(mqtt_broker_configs["TOPIC"] + "/system/interacao")
         client.subscribe(mqtt_broker_configs["TOPIC"] + "/reader/barcode")
 
 
@@ -48,9 +47,6 @@ def on_message(client, userdata, message, properties=None):
             SpeakController.talk(sentence)
         except ValueError:
             print(f'Payload inválido: {payload}')
-            
-    # if topic == "notebook/alarm":
-    #     SpeakController.alarm()
     
     if topic == "/notebook/system/block":
         SystemController.block_screen()
@@ -61,12 +57,12 @@ def on_message(client, userdata, message, properties=None):
     if topic == "/notebook/system/calculator":
         SystemController.open_calculator()
         
-    if topic == "/notebook/system/interacao":
-        try:
-            command = json.loads(payload)
-            SystemController.autogui(command=command)
-        except Exception as e:
-            print(f'Error: {e}')
+    # if topic == "/notebook/system/interacao":
+    #     try:
+    #         command = json.loads(payload)
+    #         SystemController.autogui(command=command)
+    #     except Exception as e:
+    #         print(f'Error: {e}')
 
     if topic == "/notebook/reader/barcode":
         barcode = str(payload)
