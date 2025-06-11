@@ -1,11 +1,20 @@
-from application.configs.broker_configs import mqtt_broker_configs
 from .mqtt_connection.mqtt_client_connection import MqttClientConnection
-import time
+import time, os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+BROKER_ADDRESS = os.getenv("MQTT_BROKER_ADDRESS")
+BROKER_PORT = int(os.getenv("MQTT_BROKER_PORT", 1883)) 
+MQTT_USERNAME = os.getenv("MQTT_USERNAME") 
+MQTT_PASSWORD = os.getenv("MQTT_PASSWORD")
+CLIENT_ID = os.getenv("MQTT_CLIENT_ID", "python_subscriber_default") 
 
 def start():
     mqtt_client_connection = MqttClientConnection(
-        mqtt_broker_configs["HOST"], mqtt_broker_configs["PORT"],
-        mqtt_broker_configs["CLIENT_NAME"], mqtt_broker_configs["KEEPALIVE"]
+        BROKER_ADDRESS, BROKER_PORT,
+        CLIENT_ID, 60,
+        MQTT_USERNAME, MQTT_PASSWORD
     )
     mqtt_client_connection.start_connection()
 

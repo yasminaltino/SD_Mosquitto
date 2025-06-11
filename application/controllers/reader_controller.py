@@ -2,10 +2,9 @@ import tkinter as tk
 from tkinter import messagebox
 
 produtos = {
-    "7896102502756": ("Ketchup", 7.50),
-    "7891108035321": ("Garrafa térmica", 49.90),
-    "7891193010074": ("Pão :)", 7.90),
-    "7898641074473": ("Whey Protein Shake velho que Karina abandonou", 7.90)
+    "7702018001071": ("Gillette Mach 3", 26.00),
+    "7896799210132": ("Tempero Noz Moscada", 1.82)
+    
 }
 
 class ReaderController:

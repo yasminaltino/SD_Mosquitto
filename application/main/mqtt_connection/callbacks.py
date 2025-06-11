@@ -1,20 +1,19 @@
-from application.configs.broker_configs import mqtt_broker_configs
 import json
 from application.controllers.speak_controller import SpeakController
 from application.controllers.system_controller import SystemController
 from application.controllers.reader_controller import ReaderController
+TOPIC = "/notebook"
 
 
 def on_connect(client, userdata, flags, rc, properties=None):
     if rc == 0:
         print(f"Cliente conectado com sucesso: {client}")
-        client.subscribe(mqtt_broker_configs["TOPIC"] + "/system/volume")
-        client.subscribe(mqtt_broker_configs["TOPIC"] + "/talk")
-        client.subscribe(mqtt_broker_configs["TOPIC"] + "/system/block")
-        client.subscribe(mqtt_broker_configs["TOPIC"] + "/system/battery")
-        client.subscribe(mqtt_broker_configs["TOPIC"] + "/system/calculator")
-        # client.subscribe(mqtt_broker_configs["TOPIC"] + "/system/interacao")
-        client.subscribe(mqtt_broker_configs["TOPIC"] + "/reader/barcode")
+        client.subscribe(TOPIC + "/system/volume")
+        client.subscribe(TOPIC + "/talk")
+        client.subscribe(TOPIC + "/system/block")
+        client.subscribe(TOPIC + "/system/battery")
+        client.subscribe(TOPIC + "/system/calculator")
+        client.subscribe(TOPIC + "/reader/barcode")
 
 
 
@@ -25,7 +24,7 @@ def on_connect(client, userdata, flags, rc, properties=None):
         
         
 def on_subscribe(client, userdata, mid, granted_qos, properties=None):
-    print(f'Cliente Subscribed at {mqtt_broker_configs["TOPIC"]}')
+    print(f'Cliente Subscribed at {TOPIC}')
     print(f'QOS:{granted_qos}')
     
     
